@@ -12,7 +12,7 @@ import (
 var letterRunes = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")
 
 func getRandomString() string {
-	min, max := 7, 8
+	min, max := 4, 8
 	targetLength := rand.Intn(max-min) + min
 	b := make([]rune, targetLength)
 	for i := range b {
@@ -97,13 +97,15 @@ func (c *Captcha) Generate() {
 	})
 	dc.SetFontFace(face)
 	w, h := dc.MeasureString(c.text)
-	dc.DrawRectangle(10, 20, w, h)
+	randx, randy := float64(rand.Intn(50-25)+25), float64(rand.Intn(100-50)+50)
+	dc.DrawRectangle(randx-25, randy-40, w, h)
 	dc.Stroke()
-	dc.DrawString(c.text, float64(rand.Intn(50-25)+25), float64(rand.Intn(100-50)+50))
+	dc.DrawString(c.text, randx, randy)
 	for i := 1; i < (rand.Intn(64-32) + 32); i++ {
 		dc.SetRGBA255(randomRGBA())
 		dc.DrawRegularPolygon(randomPolygon(i))
 		dc.Stroke()
 	}
 	dc.SavePNG(c.File())
+	dc.SavePNG("output.png")
 }
