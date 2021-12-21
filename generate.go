@@ -106,5 +106,4 @@ func (c *Captcha) Generate() {
 		dc.Stroke()
 	}
 	dc.SavePNG(c.File())
-	//dc.SavePNG("out.png")
 }

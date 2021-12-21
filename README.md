@@ -16,3 +16,11 @@ captcha.Generate()
 defer captcha.Cleanup()
 fmt.Println("the file is at", captcha.File(), "which means I can serve it with http.ServeFile or whatever.")
 ```
+
+## product
+
+this produces random captchas like the below:
+![Sample 1](sample1.png)
+![Sample 2](sample2.png)
+![Sample 3](sample3.png)
+![Sample 4](sample4.png)
