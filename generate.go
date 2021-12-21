@@ -101,7 +101,7 @@ func (c *Captcha) Generate() {
 	dc.DrawRectangle(randx-25, randy-40, w, h)
 	dc.Stroke()
 	dc.DrawString(c.text, randx, randy)
-	for i := 1; i < (rand.Intn(64-32) + 32); i++ {
+	for i := 1; i < (rand.Intn(65-33) + 33); i++ {
 		dc.SetRGBA255(randomRGBA())
 		dc.DrawRegularPolygon(randomPolygon(i))
 		dc.Stroke()
