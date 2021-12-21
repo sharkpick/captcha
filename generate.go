@@ -2,9 +2,7 @@ package captcha
 
 import (
 	"image/color"
-	"log"
 	"math/rand"
-	"time"
 
 	"github.com/fogleman/gg"
 	"github.com/golang/freetype/truetype"
@@ -76,7 +74,6 @@ func randomLinearGradient() gg.Gradient {
 }
 
 func (c *Captcha) Generate() {
-	s := time.Now()
 	dc := gg.NewContext(imgWidth, imgHeight)
 	grad := randomLinearGradient()
 
@@ -102,15 +99,12 @@ func (c *Captcha) Generate() {
 	w, h := dc.MeasureString(c.text)
 	dc.DrawRectangle(10, 20, w, h)
 	dc.Stroke()
-	dc.DrawString(c.text, 25, 65)
+	dc.DrawString(c.text, float64(rand.Intn(50-25)+25), float64(rand.Intn(100-50)+50))
 	for i := 1; i < (rand.Intn(64-32) + 32); i++ {
-		//dc.SetRGBA255(8*i, 16*1, 24*i, 255)
-		//dc.DrawRegularPolygon(5, float64(i*24), float64(i*36), 300, 256)
 		dc.SetRGBA255(randomRGBA())
 		dc.DrawRegularPolygon(randomPolygon(i))
 		dc.Stroke()
 	}
 	dc.SavePNG(c.File())
-	dc.SavePNG("out.png")
-	log.Println("finished in", time.Since(s))
+	//dc.SavePNG("out.png")
 }
