@@ -23,6 +23,10 @@ type Captcha struct {
 	text string
 }
 
+func (c *Captcha) Text() string {
+	return c.text
+}
+
 func (c *Captcha) File() string {
 	return fmt.Sprintf(filename, workspace, c.text)
 }
